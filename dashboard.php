@@ -1,7 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: J-F Grenier
- * Date: 2015-12-17
- * Time: 12:06
- */
+require_once '_defines.php';
+require_once 'data/_main_data.php';
+$site_data[PAGE_ID] = 'dashboard';
+require_once 'view_parts/_page_base.php';
+?>
+
+    <div id="main"></div>
+
+<?php
+require_once 'view_parts/_page_bottom.php';
+?>

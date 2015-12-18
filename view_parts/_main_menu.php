@@ -1,10 +1,17 @@
 <?php
 $menu_data = array(
-    'accueil' => 'index.php',
-    'contact' => 'contact.php',
-    'inscription' => 'inscription.php',
-    'dashboard' => 'dashboard.php'
-
+    'Accueil' => 'index.php',
+    'Contact' => 'contact.php',
+    'Dashboard' => 'dashboard.php',
+    'Inscription' => 'inscription.php',
 );
+?>
 
 
+<ul>
+    <?php
+    foreach($menu_data as $name => $link) {
+        echo "<li><a href=\"$link\">$name</a></li>";
+    }
+    ?>
+</ul>
