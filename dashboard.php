@@ -8,16 +8,15 @@ require_once 'view_parts/_page_base.php';
 
     <div id="main">
         <ul>
-            <?php foreach ($talk_msg_data as $tmsg) {?>
+            <?php foreach ($talk_msg_data as $tmsg) { ?>
                 <li class="tmsg_cont" style="background-color: <?php echo $tmsg['tmsg_color'] ?>">
                     <div class="tmsg_head">
                         <span class="tmsg_time"><?php echo $tmsg['tmsg_time'] ?></span>
                         <span class="tmsg_username"><?php echo $tmsg['tmsg_user'] ?></span>
                     </div>
-                    <p class="tmsg_body">
-                        <?php echo $tmsg['tmsg_body'] ?>
-                    </p>
+                    <p class="tmsg_body"><?php echo $tmsg['tmsg_body'] ?></p>
                 </li>
+
             <?php } ?>
         </ul>
     </div>
