@@ -6,8 +6,8 @@
  * 	- maj date dernière connexion
  */
 
-require_once(dirname(__FILE__) . '/_conn.php');
-require_once(dirname(__FILE__) . '/_common.php');
+require_once 'db/_conn.php';
+require_once 'db/_common.php';
 /**
  * Indique l'état connecté dans les appels de fonction
  */

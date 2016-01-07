@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . '/_defines.php');
+require_once 'db/_defines.php';
 
 // Creation de l'objet PDO pour la connexion
 // Il va nous servir tout au long du code pour l'utilisation de la DB
