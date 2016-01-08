@@ -3,7 +3,6 @@
  *  Quelques fonctions utiles et génériques pour les scripts exploitant la base de données p62_dbkitdem
  * 	- get_tb_cols() liste les colonnes d'une table
  */
-
 /**
  * Fournir la liste des colonnes d'un table donnée
  * @param $tablecols : Le tableau des colonnes de la table
@@ -19,7 +18,6 @@ function get_tb_cols(array $tablecols, $prefix = '', $with_id = false) {
     $resultat = $prefix . implode($tablecols, $sep);
     return $resultat;
 }
-
 /**
  * Fournir une chaine au format `nom_col`=:nom_col
  * @param $col_name : Le nom de la colonne
@@ -29,7 +27,6 @@ function get_tb_cols(array $tablecols, $prefix = '', $with_id = false) {
 function get_tb_col_pair($col_name, $operator = '=') {
     return ACCENT_GRAVE_CAR . $col_name . ACCENT_GRAVE_CAR . ' ' . $operator . ' ' . COLON_CAR . $col_name;
 }
-
 /**
  * Encrypter un mot de passe
  * @param $password : Le mot de passe à encrypter
@@ -46,7 +43,6 @@ function passwd_encrypt($password) {
     }
     return $password_hash;
 }
-
 /**
  * Comparer un mot de passe avec un hash préalablement enregistré
  * NB : Le hash enregistré est nécéssaire pour calculer le hash du password fourni
@@ -63,8 +59,6 @@ function passwd_check($password, $password_hash) {
     }
     return $result;
 }
-
-
 /**
  * Vider une table
  * ATTENTION, pas d'avertissement ici !!!!

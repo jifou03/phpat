@@ -6,12 +6,8 @@
  * 	- connexion / deconnexion d'un utilisateur
  * 	- parcours des utilisateurs
  */
-
 require_once('_user.php');
-
 //var_dump(get_tb_cols($user_tb_cols));
-
-
 /**
  * Préparation de la table pour les tests
  */
@@ -20,8 +16,6 @@ table_truncate(PHPAT_DB_TB_USERCNX); // Vider la table des usercnx
 user_delete('gp');
 user_delete('jiminy');
 user_delete('pinocchio');
-
-
 /**
  * Ajout (insertion) d'un nouvel utilisateur
  * UC1 : Ajout de l'utilisateur 'gp' après vérification de la disponibilité du username
@@ -35,20 +29,17 @@ if ( ! username_exists('gp')) {
 if (username_exists('gp')) {
     echo "Le username (gp) est pris.";
 };
-
 /**
  * Authentification d'un utilisateur
  * UC1 : Échec de l'authentification
  * UC2 : Réussite de l'authentification
  */
-
 // UC1 : Tentative d'authentification avec un mot de passe incorrect
 $gp_user_info = user_authenticate('gp','invalid_password');
 // En principe, le réponse vaut false
 if (false === $gp_user_info) {
     echo "<p>L'authentification de l'utilisateur 'gp' avec le mot de passe 'invalid_password' a échoué.</p>";
 }
-
 // UC2 : Tentative d'authentification réussie
 $gp_user_info = user_authenticate('gp','gp');
 // En principe la réponse ne vaut pas false et contient les paramètres de l'utilisateur authentifié
@@ -58,8 +49,6 @@ if (false === $gp_user_info) {
     echo "<p>L'authentification de l'utilisateur 'gp' avec le mot de passe 'gp' a réussi.</p>";
     echo "<p>Les paramètres de l'utilisateur sont :" . implode($gp_user_info, ',') . "</p>";
 }
-
-
 /**
  * Enregistrer plusieurs connexions et déconnexions et Lister les utilisateurs connectés
  *

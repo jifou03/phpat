@@ -5,9 +5,8 @@
  * 	- ajout d'utilisateur
  * 	- maj date dernière connexion
  */
-
-require_once 'db/_conn.php';
-require_once 'db/_common.php';
+require_once(dirname(__FILE__) . '/_conn.php');
+require_once(dirname(__FILE__) . '/_common.php');
 /**
  * Indique l'état connecté dans les appels de fonction
  */
@@ -24,7 +23,6 @@ define('USER_TB_DATE_IN', 'date_in');
  * Champ date_out de la table user
  */
 define('USER_TB_DATE_OUT', 'date_out');
-
 /**
  * Liste des colonnes de la table user
  */
@@ -42,7 +40,6 @@ $user_tb_cols = array(
     USER_TB_COL_LASTNAME,
     USER_TB_COL_EMAIL,
 );
-
 define('USERCNX_TB_COL_ID', 'id');
 define('USERCNX_TB_COL_USERID', 'user_id');
 define('USERCNX_TB_COL_SESSIONID', 'session_id');
@@ -57,7 +54,6 @@ $usercnx_tb_cols = array(
     USERCNX_TB_COL_DATELASTACCESS,
     USERCNX_TB_COL_DATEOUT,
 );
-
 /**
  * Supprimer utilisateur
  * ATTENTION, pas d'avertissement ici !!!!
@@ -83,7 +79,6 @@ function user_delete($username) {
     $resultat = $res;
     return $resultat;
 }
-
 /**
  * Authentifier un utilisateur
  * On commence par rechercher l'utilisateur par son username
@@ -94,8 +89,8 @@ function user_delete($username) {
  * @return array|bool
  */
 function user_authenticate($username, $password) {
-	global $pdo;
-	$resultat = false; // Mode défensif
+    global $pdo;
+    $resultat = false; // Mode défensif
     $queryStr = 'SELECT * FROM ' . PHPAT_DB_TB_USER. ' WHERE ' . get_tb_col_pair(USER_TB_COL_USERNAME);
     try {
         $sth = $pdo->prepare($queryStr);
@@ -109,19 +104,18 @@ function user_authenticate($username, $password) {
         echo "Echec tentative d'authentification de l'utilisateur $username : (" . $e->getMessage() . ')<br/>';
         exit();
     }
-	if ($res) {
-		$user_data = $sth->fetch(PDO::FETCH_ASSOC);
+    if ($res) {
+        $user_data = $sth->fetch(PDO::FETCH_ASSOC);
         // Test de validité du mot de passe
         if (passwd_check($password, $user_data[USER_TB_COL_PASSWORD_HASH])) {
-            var_dump($user_data);
+//            var_dump($user_data);
             // Retirer le hash des valeurs retournées
             unset($user_data[USER_TB_COL_PASSWORD_HASH]);
             $resultat = $user_data;
         }
     };
-	return $resultat;
+    return $resultat;
 }
-
 /**
  *  Indiquer qu'un username est déjà pris
  * @param $username
@@ -151,7 +145,6 @@ function username_exists($username) {
     }
     return $resultat;
 }
-
 /**
  * Insertion (ajout) d'un nouvel utilisateur
  * NB: Provoque aussi l'ajout d'en enregistrement dans la table usercnx;
@@ -188,7 +181,6 @@ function user_add($username, $password, $firstname, $lastname, $email) {
     };
     return $resultat;
 }
-
 /**
  * Etablit la connexion d'un utilisateur (login)
  * Stratégie :
@@ -223,7 +215,6 @@ function user_log_in($user_id, $session_id) {
     };
     return $resultat;
 }
-
 /**
  * Termine la connexion d'un utilisateur (logout)
  * Stratégie :
@@ -239,7 +230,7 @@ function user_log_out($user_id, $session_id) {
     $queryStr = 'UPDATE ' . PHPAT_DB_TB_USERCNX
         . ' SET ' . get_tb_col_pair(USERCNX_TB_COL_DATEOUT)
         . ' WHERE ' . get_tb_col_pair(USERCNX_TB_COL_SESSIONID)
-           . ' AND ' . get_tb_col_pair(USERCNX_TB_COL_USERID);
+        . ' AND ' . get_tb_col_pair(USERCNX_TB_COL_USERID);
     var_dump($queryStr);
     $sth = $pdo->prepare($queryStr);
     $params = array(
@@ -259,7 +250,6 @@ function user_log_out($user_id, $session_id) {
     };
     return $resultat;
 }
-
 /**
  * Etablir la connexion (login) ou la déconnexion (logout) d'un utilisateur
  * @param $user_id : id du user
@@ -282,8 +272,6 @@ function user_cnx_in_out($user_id, $session_id, $cnx_state) {
     }
     return $resultat;
 }
-
-
 /**
  * Lister des utilisateurs connectés
  * NB : Pas de limite mise en place ici (à améliorer si le nb d'utilisateurs devient important

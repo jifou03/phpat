@@ -1,6 +1,11 @@
 <?php
 define('TALK_MSG_LIST_SIZE', 25);
-
+/**
+ * Définir la variable (provisoire) qui contient les derniers
+ * User: gpnissar
+ * Date: 2015-12-28
+ * Time: 22:23
+ */
 $talk_msg_data = array(
     '11' => array(
         'tmsg_time' => '2016-01-04 12:15',
